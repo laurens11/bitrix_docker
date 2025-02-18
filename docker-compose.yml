@@ -1,7 +1,7 @@
 services:
   webserver:
     build:
-      context: ./bin/${PHPVERSION}
+      context: ./docker/${PHPVERSION}
       ssh:
         - default
     container_name: "${COMPOSE_PROJECT_NAME}-${PHPVERSION}"
@@ -33,7 +33,7 @@ services:
       - "host.docker.internal:host-gateway"
   database:
     build:
-      context: "./bin/${DATABASE}"
+      context: "./docker/${DATABASE}"
     container_name: "${COMPOSE_PROJECT_NAME}-${DATABASE}"
     restart: "always"
     ports:
@@ -50,7 +50,7 @@ services:
   redis:
     container_name: "${COMPOSE_PROJECT_NAME}-redis"
     build:
-      context: "./bin/redis"
+      context: "./docker/redis"
     ports:
       - "127.0.0.1:${HOST_MACHINE_REDIS_PORT}:6379"
   rabbitmq:
@@ -62,7 +62,7 @@ services:
       - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
       - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=-rabbit log_levels [{connection,error},{default,error}] disk_free_limit 2147483648
     build:
-      context: "./bin/rabbitmq"
+      context: "./docker/rabbitmq"
     ports:
       - "127.0.0.1:${HOST_MACHINE_RABBITMQ_PORT}:5672"
       - "127.0.0.1:${HOST_MACHINE_RABBITMQ_SECOND_PORT}:15672"
@@ -71,7 +71,7 @@ services:
   mailhog:
     container_name: "${COMPOSE_PROJECT_NAME}-mailhog"
     build:
-      context: "./bin/mailhog"
+      context: "./docker/mailhog"
     ports:
       - "127.0.0.1:${HOST_MACHINE_MAILHOG_PORT}:8025"
   phpmyadmin:
