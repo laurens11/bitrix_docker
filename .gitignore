@@ -1,3 +1,5 @@
 www/
 .idea/
 .env
+logs/
+data/
