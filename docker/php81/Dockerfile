@@ -1,4 +1,4 @@
-FROM php:8.4-apache
+FROM php:8.1-apache
 
 RUN apt-get update && apt-get install -y \
     git \
@@ -44,6 +44,3 @@ RUN docker-php-ext-install -j$(nproc) \
     pcntl && \
     pecl install xdebug-3.4.0 redis yaml && \
     docker-php-ext-enable xdebug redis yaml
-    #docker-php-ext-configure oci8 --with-oci8=instantclient,/usr/lib/oracle/instantclient_19_6
-    #pecl install oci8 && \
-    #docker-php-ext-enable oci8
